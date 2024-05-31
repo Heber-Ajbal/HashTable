@@ -373,7 +373,7 @@ String filePath = "pais.xls";
         Cell headerCell2 = headerRow.createCell(1);
 
         headerCell1.setCellValue("ISO Pais");
-        headerCell2.setCellValue("Tiempo (mili seg.)");
+        headerCell2.setCellValue("Tiempo");
         
     }
 
@@ -469,7 +469,7 @@ String filePath = "pais.xls";
         Cell headerCell2 = headerRow.createCell(1);
 
         headerCell1.setCellValue("ISO Departamento");
-        headerCell2.setCellValue("Tiempo (mili seg.)");
+        headerCell2.setCellValue("Tiempo");
         
     }
 
@@ -565,7 +565,7 @@ String filePath = "pais.xls";
         Cell headerCell2 = headerRow.createCell(1);
 
         headerCell1.setCellValue("ISO Municipio");
-        headerCell2.setCellValue("Tiempo (mili seg.)");
+        headerCell2.setCellValue("Tiempo");
         
     }
 
