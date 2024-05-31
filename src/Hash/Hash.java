@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package grafos;
+package Hash;
 
 import Controller.HashTables;
 import View.frmHash;
@@ -26,7 +26,7 @@ import javafx.stage.Stage;
  *
  * @author Heber
  */
-public class Grafos extends Application {
+public class Hash extends Application {
     
     connection con = new connection();
     Connection connect;
