@@ -75,6 +75,10 @@ public class HashTables {
     public Countries getCountryById(Integer iso){
         return countriesById.get(iso);
     }
+    
+    public States getStateById(Integer iso){
+        return statesById.get(iso);
+    }
 
     public  void FindHashTable(){
         // Agregar países

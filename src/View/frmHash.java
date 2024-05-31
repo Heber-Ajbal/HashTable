@@ -221,6 +221,11 @@ public void LoadCity(){
         jLabel3.setText("Buscar Municipio:");
 
         btnCity.setText("Buscar");
+        btnCity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCityActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -343,7 +348,7 @@ public void LoadCity(){
         
         
     // Crear el archivo Excel
-String filePath = "tiempos_de_ejecucion.xls";
+String filePath = "pais.xls";
     File file = new File(filePath);
     Workbook workbook;
     Sheet sheet;
@@ -366,7 +371,7 @@ String filePath = "tiempos_de_ejecucion.xls";
         Cell headerCell2 = headerRow.createCell(1);
 
         headerCell1.setCellValue("ISO Pais");
-        headerCell2.setCellValue("Tiempo de Ejecución (seg.)");
+        headerCell2.setCellValue("Tiempo (mili seg.)");
         
     }
 
@@ -378,7 +383,7 @@ String filePath = "tiempos_de_ejecucion.xls";
     Cell newCell2 = newRow.createCell(1);
 
     newCell1.setCellValue(txtSearch.getText());
-    newCell2.setCellValue(duration + " s");
+    newCell2.setCellValue(duration + " ms");
 
     // Guardar el archivo Excel
     try (FileOutputStream fileOut = new FileOutputStream(filePath)) {
@@ -437,8 +442,7 @@ String filePath = "tiempos_de_ejecucion.xls";
         System.out.println("El tiempo de ejecución fue: " + duration + " Milisegundos.");
         
         
-    // Crear el archivo Excel
-String filePath = "tiempos_de_ejecucion.xls";
+    String filePath = "Departamento.xls";
     File file = new File(filePath);
     Workbook workbook;
     Sheet sheet;
@@ -446,14 +450,14 @@ String filePath = "tiempos_de_ejecucion.xls";
     if (file.exists()) {
         try (FileInputStream fileIn = new FileInputStream(file)) {
             workbook = new HSSFWorkbook(fileIn);
-            sheet = workbook.getSheetAt(1);
+            sheet = workbook.getSheetAt(0);
         } catch (IOException e) {
             e.printStackTrace();
             return;
         }
     } else {
         workbook = new HSSFWorkbook();
-        sheet = workbook.createSheet("Estado");
+        sheet = workbook.createSheet("DEPARTAMENTO ");
 
         // Crear la fila y las celdas de encabezado
         Row headerRow = sheet.createRow(0);
@@ -461,7 +465,7 @@ String filePath = "tiempos_de_ejecucion.xls";
         Cell headerCell2 = headerRow.createCell(1);
 
         headerCell1.setCellValue("ISO Departamento");
-        headerCell2.setCellValue("Tiempo de Ejecución (seg.)");
+        headerCell2.setCellValue("Tiempo (mili seg.)");
         
     }
 
@@ -472,8 +476,8 @@ String filePath = "tiempos_de_ejecucion.xls";
     Cell newCell1 = newRow.createCell(0);
     Cell newCell2 = newRow.createCell(1);
 
-    newCell1.setCellValue(txtSearch.getText());
-    newCell2.setCellValue(duration + " s");
+    newCell1.setCellValue(txtSearch1.getText());
+    newCell2.setCellValue(duration + " ms");
 
     // Guardar el archivo Excel
     try (FileOutputStream fileOut = new FileOutputStream(filePath)) {
@@ -481,7 +485,101 @@ String filePath = "tiempos_de_ejecucion.xls";
     } catch (IOException e) {
         e.printStackTrace();
     }
+    
     }//GEN-LAST:event_btnStateActionPerformed
+
+    private void btnCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCityActionPerformed
+         long startTime = System.currentTimeMillis();
+          Cities city = hash.getCityByIso(txtSearch2.getText());
+          
+          if(city != null){
+              
+              DefaultTableModel tableModelState = (DefaultTableModel) tblState.getModel();      
+                tableModelState.setRowCount(0);
+                DefaultTableModel tableModelCity = (DefaultTableModel) tblCity.getModel();      
+                tableModelCity.setRowCount(0);
+                
+                    Object[] rowcity = new Object[3];
+                    rowcity[0] = city.getId(); 
+                    rowcity[1] = city.getName(); 
+                    rowcity[2] = city.getISO();
+                    tableModelCity.addRow(rowcity);    
+                    tblState.setModel(tableModelCity);
+                    
+                States state = hash.getStateById(city.getStateId());
+                
+                Object[] rowState = new Object[3];
+                rowState[0] = state.getId(); 
+                rowState[1] = state.getName(); 
+                rowState[2] = state.getISO();
+                tableModelState.addRow(rowState);
+                tblState.setModel(tableModelState);
+                
+                Countries country = hash.getCountryById(state.getCountryId());
+
+                tableModel = (DefaultTableModel) tblCountry.getModel();
+                tableModel.setRowCount(0);
+                Object[] rowCountry = new Object[3];
+                rowCountry[0] = country.getId(); 
+                rowCountry[1] = country.getName(); 
+                rowCountry[2] = country.getISO();
+                tableModel.addRow(rowCountry);               
+              
+                tblCountry.setModel(tableModel);
+               tblCity.setModel(tableModelCity);
+              
+          }else{
+          }
+          
+           long endTime = System.currentTimeMillis();
+        long duration = endTime - startTime;
+        System.out.println("El tiempo de ejecución fue: " + duration + " Milisegundos.");
+        
+        
+    String filePath = "Municipio.xls";
+    File file = new File(filePath);
+    Workbook workbook;
+    Sheet sheet;
+
+    if (file.exists()) {
+        try (FileInputStream fileIn = new FileInputStream(file)) {
+            workbook = new HSSFWorkbook(fileIn);
+            sheet = workbook.getSheetAt(0);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+    } else {
+        workbook = new HSSFWorkbook();
+        sheet = workbook.createSheet("MUNICIPIO ");
+
+        // Crear la fila y las celdas de encabezado
+        Row headerRow = sheet.createRow(0);
+        Cell headerCell1 = headerRow.createCell(0);
+        Cell headerCell2 = headerRow.createCell(1);
+
+        headerCell1.setCellValue("ISO Municipio");
+        headerCell2.setCellValue("Tiempo (mili seg.)");
+        
+    }
+
+        
+    // Determinar la siguiente fila vacía
+    int lastRowNum = sheet.getLastRowNum();
+    Row newRow = sheet.createRow(lastRowNum + 1);
+    Cell newCell1 = newRow.createCell(0);
+    Cell newCell2 = newRow.createCell(1);
+
+    newCell1.setCellValue(txtSearch2.getText());
+    newCell2.setCellValue(duration + " ms");
+
+    // Guardar el archivo Excel
+    try (FileOutputStream fileOut = new FileOutputStream(filePath)) {
+        workbook.write(fileOut);
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    }//GEN-LAST:event_btnCityActionPerformed
 
     /**
      * @param args the command line arguments
