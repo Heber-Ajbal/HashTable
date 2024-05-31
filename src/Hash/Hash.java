@@ -52,31 +52,7 @@ public class Hash extends Application {
      */
     public static void main(String[] args) {
         launch(args);
-    }
-    
-   /* private void query(){
-        try{
-            String sql = "SELECT  c.id as IDC, s.id as IDS, s.iso, c.name FROM states s JOIN cities c ON s.id = c.id_state";
-            connect = con.gertConnection();
-            st = connect.createStatement();
-            rs = st.executeQuery(sql);
-            
-            while (rs.next()) {
-                String iso = rs.getString("iso");
-                String stateName = rs.getString("name");                
-                Integer id = Integer.parseInt(rs.getString("IDC"));                                
-                Integer idC = Integer.parseInt(rs.getString("IDS")); 
-                String ultimasDosLetras = iso.substring(iso.length() - 2);
-                String isoNuevo = ultimasDosLetras  + stateName.substring(0, 3); // Combinar iso y las dos primeras letras del nombre del estado
-                System.out.println("INSERT INTO states (id, id_state, name, iso) VALUES ('"+ id + "', '" + idC + "', '"+ stateName + "', '" + isoNuevo + "');");
-            }
-            
-            
-        }catch(Exception e){}
-        
-    }*/
-    
-    
+    }  
         
 }
     

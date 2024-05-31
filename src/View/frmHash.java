@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.CellRangeAddress;
@@ -339,7 +340,8 @@ public void LoadCity(){
                 
                 
         } else {
-            System.out.println("No se encontró el país con el ISO proporcionado");
+            JOptionPane.showMessageDialog(null, "ISO incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
         
         long endTime = System.currentTimeMillis();
@@ -435,6 +437,8 @@ String filePath = "pais.xls";
                tblCity.setModel(tableModelCity);
               
           }else{
+              JOptionPane.showMessageDialog(null, "ISO incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
+              return;
           }
           
            long endTime = System.currentTimeMillis();
@@ -529,6 +533,8 @@ String filePath = "pais.xls";
                tblCity.setModel(tableModelCity);
               
           }else{
+              JOptionPane.showMessageDialog(null, "ISO incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
+              return;
           }
           
            long endTime = System.currentTimeMillis();
